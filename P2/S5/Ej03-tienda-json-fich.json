@@ -1,0 +1,12 @@
+[
+    {
+        "nombre": "Fimi X8",
+        "descripcion": "Dron Plegable Fimi",
+        "stock": 8
+      },
+      {
+        "nombre": "Mavic Air 2",
+        "descripcion": "Dron Plegable DJI",
+        "stock": 12
+      }
+]
