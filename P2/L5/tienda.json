@@ -1,0 +1,37 @@
+{
+    "productos": [  {
+                        "nombre": "Mavic Air 2",
+                        "marca": "DJI",
+                        "precio": "1000€"
+                    }, 
+                    {
+                        "nombre": "Evo 2 8k",
+                        "marca": "Autel",
+                        "precio": "1500€"
+                    }, 
+                    {
+                        "nombre": "Anafi Thermal",
+                        "marca": "Parrot",
+                        "precio": "2000€"
+                    }
+                ],
+    "usuarios": [   {
+                        "nick": "anunezd",
+                        "real": "Alejandro Núñez",
+                        "email": "anunez93@gmail.com"
+                    }, 
+                    {
+                        "nick": "ammena",
+                        "real": "Adrian Mena",
+                        "email": "amena93@gmail.com"
+                    }
+                ],
+    "pedidos":  [
+                    {
+                        "fecha": "16 de Marzo de 2021",
+                        "concepto": "Mavic Air 2 + Evo 2 8k",
+                        "precio": "3500€",
+                        "usuario": "anunezd"
+                    }
+                ]
+}
