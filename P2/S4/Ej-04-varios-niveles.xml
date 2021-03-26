@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tienda [
+    <!ELEMENT tienda (producto+)>
+    
+    <!ELEMENT producto (nombre, descripcion, stock)>
+    <!ELEMENT nombre (#PCDATA)>
+    <!ELEMENT descripcion (#PCDATA)>
+    <!ELEMENT stock (#PCDATA)>
+]>
+<tienda>
+    <producto>
+        <nombre>Fimi X8</nombre>
+        <descripcion>Dron plegable marca Fimi</descripcion>
+        <stock>10 unidades</stock>
+    </producto>
+
+    <producto>
+        <nombre>Mavic Mini</nombre>
+        <descripcion>Dron plegable 250g marca DJI</descripcion>
+        <stock>20 unidades</stock>
+    </producto>
+</tienda>
