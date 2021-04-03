@@ -2,22 +2,27 @@ body {
     background-color:  #CFCCCB;
 }
 
-.logo {
-    position: absolute;
-    left: -25px;
-    top: -25px;
+.cabecera {
+    background: #333;
+	height: 100px;
+	width: 100%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+	left: 0; /* Posicionamos la cabecera al lado izquierdo */
+	top: 0; /* Posicionamos la cabecera pegada arriba */
+	position: fixed; /* Hacemos que la cabecera tenga una posición fija */
 }
-
-
-.carro {
-    position: absolute;
-    left: 1440px;
-    top: 20px;
+.logo {float: left; 
+    margin-top: -2%;
+    margin-left: -2%;
 }
-
+.carro {float: right; 
+    margin-top: 1%;
+    margin-right: 1%;
+}
 .dji_fpv {
-    margin-top: 7%;
+    margin-top: 100px;
     height: 550px;
+    width: 101.5%;
+    margin-left: -1%;
     background-image: url("dji_fpv_combo.jpeg");
     background-position: center;
 }
@@ -28,23 +33,51 @@ h1 {
     color: white;
     text-align: center;
     position: absolute;
-    left: 300px;
-    top: 411px;
+    left: 308px;
+    top: 404px;
 }
 
 .productos {
-    margin-top: 2%;
+    margin-top: 20px;
+    margin-left: -1%;
+    width: 101.5%;
 }
 
-a {
-    margin-right: 1%;
+.fimi_x8_mini {
+    float: left; 
+    margin-right: 11%;
+    margin-left: 20px;
+    text-align: center;
 }
 
-b {
-    margin-right: 1%;
+.fimi_x8_2020 {
+    float: left; 
+    margin-right: auto;
+    text-align: center;
 }
 
-c {
-    margin-right: 1%;
+.dji_mavic_air_2 {
+    float: right; 
+    margin-right: 11%;
+    text-align: center;
 }
-  
+
+.dji_mini_2 {
+    float: right; 
+    margin-right: 20px;
+    text-align: center;
+}
+
+
+h2 {
+    font: message-box;
+    font-size:x-large;
+    color: black;
+}
+
+h3 {
+    font: message-box;
+    font-size:large;
+    color: red;
+}
+
