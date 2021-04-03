@@ -5,10 +5,12 @@ body {
 .cabecera {
     background: #333;
 	height: 100px;
-	width: 100%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+	width: 101.5%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+    margin-left: -1%;
+    margin-top: -0.6%;
 	left: 0; /* Posicionamos la cabecera al lado izquierdo */
 	top: 0; /* Posicionamos la cabecera pegada arriba */
-	position: fixed; /* Hacemos que la cabecera tenga una posición fija */
+	position: relative; /* Hacemos que la cabecera tenga una posición fija */
 }
 .logo {float: left; 
     margin-top: -2%;
@@ -19,7 +21,6 @@ body {
     margin-right: 1%;
 }
 .dji_fpv {
-    margin-top: 100px;
     height: 550px;
     width: 101.5%;
     margin-left: -1%;
