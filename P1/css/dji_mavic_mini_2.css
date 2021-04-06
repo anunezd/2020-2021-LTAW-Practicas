@@ -1,0 +1,136 @@
+body {
+    background-color:  #CFCCCB;
+}
+
+.cabecera {
+    background: #333;
+	  height: 100px;
+	  width: 101.5%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+    margin-left: -1%;
+    margin-top: -0.6%;
+	  left: 0; /* Posicionamos la cabecera al lado izquierdo */
+	  top: 0; /* Posicionamos la cabecera pegada arriba */
+	  position: relative; /* Hacemos que la cabecera tenga una posición fija */
+}
+.logo {float: left; 
+    margin-top: -2%;
+    margin-left: -2%;
+}
+.carro {float: right; 
+    margin-top: 1%;
+    margin-right: 1%;
+}
+
+.container{
+    margin-left: -10px;
+    background-color: white;
+    width: 800px;
+    padding: 30px;
+  }
+  
+  ul, li {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+  }
+  
+  ul.slider{
+    position: relative;
+    width: 800px;
+    height: 500px;
+  }
+  
+  ul.slider li {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      opacity: 0;
+      width: inherit;
+      height: inherit;
+      transition: opacity .5s;
+      background:#fff;
+  }
+  
+  ul.slider li img{
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+  
+  ul.slider li:first-child {
+      opacity: 1; /*Mostramos el primer <li>*/
+  }
+  
+  ul.slider li:target {
+      opacity: 1; /*Mostramos el <li> del enlace que pulsemos*/
+  }
+  
+  .menu{
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .menu li{
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .menu li a{
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    background-color: grey;
+    padding: 10px;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    border-radius: 100%;
+  }
+
+table {
+    width: 100%;
+    border: 1px solid #000;
+ }
+ th, td {
+    width: 25%;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid #000;
+ }
+
+ h2 {
+  font: message-box;
+  font-size:x-large;
+  color: black;
+  top: 100px;
+  left: 900px;
+  position: absolute;
+}
+
+h3 {
+  font: message-box;
+  font-size:x-large;
+  color: red;
+  top: 210px;
+  left: 900px;
+  position: absolute;
+}
+
+button {
+  font: message-box;
+  font-size:large;
+  background-color: #333;
+  color: red;
+  border-radius: 12px;
+  top: 230px;
+  left: 1375px;
+  position: absolute;
+}
+
+iframe {
+  top: 300px;
+  left: 900px;
+  position: absolute;
+}
+
+
