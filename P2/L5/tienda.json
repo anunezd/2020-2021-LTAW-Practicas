@@ -2,17 +2,20 @@
     "productos": [  {
                         "nombre": "Mavic Air 2",
                         "marca": "DJI",
-                        "precio": "1000€"
+                        "precio": "1000€",
+                        "stock": "10"
                     }, 
                     {
                         "nombre": "Evo 2 8k",
                         "marca": "Autel",
-                        "precio": "1500€"
+                        "precio": "1500€",
+                        "stock": "10"
                     }, 
                     {
                         "nombre": "Anafi Thermal",
                         "marca": "Parrot",
-                        "precio": "2000€"
+                        "precio": "2000€",
+                        "stock": "10"
                     }
                 ],
     "usuarios": [   {
