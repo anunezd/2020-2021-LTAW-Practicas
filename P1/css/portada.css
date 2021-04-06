@@ -12,19 +12,22 @@ body {
 	top: 0; /* Posicionamos la cabecera pegada arriba */
 	position: relative; /* Hacemos que la cabecera tenga una posición fija */
 }
+
 .logo {float: left; 
     margin-top: -2%;
     margin-left: -2%;
 }
+
 .carro {float: right; 
     margin-top: 1%;
     margin-right: 1%;
 }
+
 .dji_fpv {
     height: 550px;
     width: 101.5%;
     margin-left: -1%;
-    background-image: url("dji_fpv_combo.jpeg");
+    background-image: url("dji_fpv_portada.jpeg");
     background-position: center;
 }
 
