@@ -3,13 +3,27 @@ const fs = require('fs')
 const url = require('url')
 const PUERTO = 9000
 
-//-- Cargar pagina web del formulario
-const FORMULARIO = fs.readFileSync('login_formulario.html','utf-8');
-
-//-- HTML de la página de respuesta
-const RESPUESTA = fs.readFileSync('login_respuesta.html', 'utf-8');
-
 console.log("Arrancando servidor...")
+
+//-- Npmbre del fichero JSON a leer
+const FICHERO_JSON = "tienda.json"
+
+//-- Nombre del fichero JSON de salida
+const FICHERO_JSON_OUT = "tienda_mod.json"
+
+//-- Leer el fichero JSON
+const  tienda_json = fs.readFileSync(FICHERO_JSON);
+
+//-- Crear la estructura tienda a partir del contenido del fichero
+const tienda = JSON.parse(tienda_json);
+
+//-- Mostrar informacion sobre la tienda
+console.log("Usuarios en la tienda: " + tienda.usuarios.length);
+
+//-- Recorrer el array de usuarios
+tienda.usuarios.forEach((element, index)=>{
+  console.log("Usuario: " + (index + 1) + ": " + element.nick + " || Nombre: " + element.real);
+});
 
 //-- SERVIDOR: Bucle principal de atención a clientes
 const server = http.createServer((req, res) => {
@@ -42,34 +56,38 @@ const server = http.createServer((req, res) => {
 
     //-- Leer los parámetros
     let nombre = myURL.searchParams.get('nombre');
-    let apellidos = myURL.searchParams.get('apellidos');
     console.log(" Nombre: " + nombre);
-    console.log(" Apellidos: " + apellidos);
-
-     //-- Por defecto entregar formulario
-    // let content_type = "text/html";
-    // let content = FORMULARIO;
 
     if (myURL.pathname == '/procesar') {
-        content_type = "text/html";
+        //-- Cargar pagina web del formulario
+        const FORMULARIO = fs.readFileSync('login_formulario.html','utf-8');
+        //-- HTML de la página de respuesta
+        const RESPUESTA = fs.readFileSync('login_respuesta.html', 'utf-8');
+
+        //-- Por defecto entregar formulario
+        let content_type = "text/html";
+        let content = FORMULARIO;
 
         //-- Reemplazar las palabras claves por su valores
         //-- en la plantilla HTML
         content = RESPUESTA.replace("NOMBRE", nombre);
-        content = content.replace("APELLIDOS", apellidos); 
+
+        //-- Recorrer el array de usuarios
+        tienda.usuarios.forEach((element, index)=>{
+              if (element.nick == nombre) {
+                  //-- Enviar la respuesta
+                  res.setHeader('Content-Type', content_type);
+                  res.write(content);
+                  res.end()
+              }
+        });
     }
     
-    //-- Enviar la respuesta
-    // res.setHeader('Content-Type', content_type);
-    // res.write(content);
-    // res.end()
-
     //-- Peticion recibida
     console.log("Peticion recibida!")
     console.log("Recurso (URL): " + req.url)
   
     //-- Crear mensaje de respuesta o error
-  
     console.log()
     fs.readFile("." + filename, (err, data) => {
   

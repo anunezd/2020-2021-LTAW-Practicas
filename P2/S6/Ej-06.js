@@ -9,7 +9,7 @@ const PUERTO = 8080;
 
 //-- Cargar pagina web de prueba
 const EJ6_HTML = fs.readFileSync('Ej-06.html','utf-8');
-const LOGIN = fs.readFileSync('Ej-05-login.html', 'utf-8');
+const LOGIN = fs.readFileSync('Ej-06-login.html', 'utf-8');
 
 //-- Analizar la cookie y devolver el nombre del
 //-- usuario si existe, o null en caso contrario
