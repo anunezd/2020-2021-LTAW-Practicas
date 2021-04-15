@@ -58,15 +58,13 @@ const server = http.createServer((req, res) => {
     let nombre = myURL.searchParams.get('nombre');
     console.log(" Nombre: " + nombre);
 
-    if (myURL.pathname == '/procesar') {
-        //-- Cargar pagina web del formulario
-        const FORMULARIO = fs.readFileSync('login_formulario.html','utf-8');
+    if (myURL.pathname == '/login') {
+
         //-- HTML de la página de respuesta
         const RESPUESTA = fs.readFileSync('login_respuesta.html', 'utf-8');
 
         //-- Por defecto entregar formulario
         let content_type = "text/html";
-        let content = FORMULARIO;
 
         //-- Reemplazar las palabras claves por su valores
         //-- en la plantilla HTML
@@ -79,9 +77,37 @@ const server = http.createServer((req, res) => {
                   res.setHeader('Content-Type', content_type);
                   res.write(content);
                   res.end()
+                  filename = "login_respuesta.html";
               }
         });
     }
+
+    if (myURL.pathname == '/tarjeta') {
+
+      //-- HTML de la página de respuesta
+      const RESPUESTA = fs.readFileSync('tarjeta_respuesta.html', 'utf-8');
+
+      //-- Por defecto entregar formulario
+      let content_type = "text/html";
+
+      //-- Reemplazar las palabras claves por su valores
+      //-- en la plantilla HTML
+      content = RESPUESTA.replace("DIRECCION", direccion);
+      content = content.replace("TARJETA", tarjeta);
+
+      //-- Recorrer el array de usuarios
+      tienda.pedidos.forEach((element, index)=>{
+            if (element.direccion == null || element.tarjeta == null) {
+              element.direccion = direccion
+              element.tarjeta = tarjeta
+                //-- Enviar la respuesta
+                res.setHeader('Content-Type', content_type);
+                res.write(content);
+                res.end()
+                filename = "login_respuesta.html";
+            }
+      });
+  }
     
     //-- Peticion recibida
     console.log("Peticion recibida!")
