@@ -1,0 +1,54 @@
+{
+    "productos": [  {
+                        "nombre": "FPV",
+                        "marca": "DJI",
+                        "precio": "1200€",
+                        "stock": "10"
+                    }, 
+                    {
+                        "nombre": "Mavic Air 2",
+                        "marca": "DJI",
+                        "precio": "900€",
+                        "stock": "10"
+                    }, 
+                    {
+                        "nombre": "Mini 2",
+                        "marca": "DJI",
+                        "precio": "500€",
+                        "stock": "10"
+                    },
+                    {
+                        "nombre": "X8 Mini",
+                        "marca": "FIMI",
+                        "precio": "380€",
+                        "stock": "10"
+                    }, 
+                    {
+                        "nombre": "X8",
+                        "marca": "FIMI",
+                        "precio": "330€",
+                        "stock": "10"
+                    }
+                ],
+    "usuarios": [   {
+                        "nick": "anunezd",
+                        "real": "Alejandro Núñez",
+                        "email": "anunez93@gmail.com"
+                    }, 
+                    {
+                        "nick": "ammena",
+                        "real": "Adrian Mena",
+                        "email": "amena93@gmail.com"
+                    }
+                ],
+    "pedidos":  [
+                    {
+                        "fecha": "",
+                        "productos": "",
+                        "importe": "",
+                        "usuario": "",
+                        "tarjeta": "",
+                        "direccion": ""
+                    }
+                ]
+}
