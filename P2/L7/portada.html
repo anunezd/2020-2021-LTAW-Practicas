@@ -5,7 +5,7 @@
     <title>Πlota2</title>
     <link rel="stylesheet" type="text/css" href="css/portada.css">
     <link rel="icon" href="imagenes/logo_transparent.png" type="image/x-icon">
-    <script src="client.js" defer></script>
+    <script src="cliente.js" defer></script>
   </head>
   <body>
 
@@ -17,16 +17,14 @@
     <div class="carro">
       <a href= "/carrito.html"><img src="imagenes/carrito.png" width="60" height="60"></a>
     </div>
+    <form id= "buscador" action="/search" method="post">
+      <input id="ver" autocomplete=off placeholder="Encuentra tus drones" type=search name="busqueda" list="productos"/>
+      <datalist id="productos">
+        <option id="resultado"></option>
+      </datalist>
+      <input type="submit" value="Buscar"/>
+    </form>
   </div>
-
-  <form id= "buscador" action="/search" method="post">
-    <input id="ver" autocomplete=off placeholder="Encuentra tus drones" type=search name="busqueda" list="productos"/>
-    <datalist id="productos">
-      <option id="resultado"></option>
-    </datalist>
-    <input type="submit" value="Buscar"/>
-  </form>
-
 
   <div class="dji_fpv">
     <a href="/dji_fpv.html" style="text-decoration:none"> <h1>DJI FPV: vuelos en primera persona a 140 km/h y camara 4k</h1> </a>

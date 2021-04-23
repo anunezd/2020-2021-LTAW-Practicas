@@ -11,6 +11,7 @@ const PRODUCTOS_JSON = fs.readFileSync('tienda.json');
 //-- Obtener el array de productos
 let productos = JSON.parse(PRODUCTOS_JSON).productos;
 console.log(productos)
+// console.log(productos)
 
 //-- SERVIDOR: Bucle principal de atención a clientes
 const server = http.createServer((req, res) => {
@@ -35,87 +36,89 @@ const server = http.createServer((req, res) => {
         }
     })
 
-  // Para gestionar las busquedas que vienen por formulario
-  } else if (q.pathname == "/search") {
+    // Para gestionar las busquedas que vienen por formulario
+    } else if (q.pathname == "/search") {
 
-    if (req.method === 'POST') {
+        if (req.method === 'POST') {
 
-      req.on('data', chunk => {
+        req.on('data', chunk => {
 
-        //-- Leer los datos (convertir el buffer a cadena)
-        data = chunk.toString()
+          //-- Leer los datos (convertir el buffer a cadena)
+          data = chunk.toString()
 
-        //-- Añadir los datos a la respuesta
-        content = data.split("=")[1].toLowerCase()
+          //-- Añadir los datos a la respuesta
+          content = data.split("=")[1].toLowerCase()
 
-        //-- Mostrar los datos en la consola del servidor
-        console.log("Datos recibidos: " + content)
+          //-- Mostrar los datos en la consola del servidor
+          console.log("Datos recibidos: " + content)
 
-        switch (content) {
-          case "fpv":
-            content = "dji_fpv.html"
-          break;
+          switch (content) {
+            case "dji+fpv":
+              content = "dji_fpv.html"
+            break;
 
-          case "mavic+air+2":
-            content = "dji_mavic_air_2.html"
-          break;
+            case "dji+mavic+air+2":
+              content = "dji_mavic_air_2.html"
+            break;
 
-          case "dji+mavic+mini+2":
-            content = "dji_mavic_mini_2.html"
-          break;
+            case "dji+mavic+mini+2":
+              content = "dji_mavic_mini_2.html"
+            break;
 
-          default:
-            content = ""
-        }
-      })
+            case "fimi+x8+mini":
+              content = "fimi_x8_mini.html"
+            break;
 
-      req.on('end', ()=> {
+            case "fimi+x8c+2020":
+              content = "fimi_x8_2020.html"
+            break;
 
-        fs.readFile(content, (err, data) => {
-
-          if (err) {
-            res.writeHead(404, {'Content-Type': 'text/html'})
-            return res.end("404 Not Found")
-          } else {
-            res.writeHead(200, {'Content-Type': 'text/html'})
-            res.write(data)
-            return res.end()
+            default:
+              content = ""
           }
         })
-      })
-      return
-    } 
-  } else {
 
-    let filename = q.pathname
+        req.on('end', ()=> {
 
-      if (req.url == "/" ){
-        filename = "/portada.html"  //--Página principal
-      }  else {
-        filename = req.url
-      }
+          fs.readFile(content, (err, data) => {
+
+            if (err) {
+              res.writeHead(404, {'Content-Type': 'text/html'})
+              return res.end("404 Not Found")
+            } else {
+              res.writeHead(200, {'Content-Type': 'text/html'})
+              res.write(data)
+              return res.end()
+            }
+          })
+        })
+        return
+      } 
+
+    // Para gestionar las peticiones  
+    } else {  
+
+    filename = q.pathname
+
+    let ext = filename.split(".")[-1]
+    let mime = ""
     
-      let ext = filename.split(".")[-1]
-      let mime = ""
+    if (ext == "png" || ext == "jpg"){
+      mime = "image/" + ext
+    }
+  
+    if (ext == "html" || ext == "css"){
+      mime = "text/" + ext
+    }
+    if (ext == "js"){
+      mime = "application/javascript"
+    }
     
-      if (ext == "png" || ext == "jpg"){
-        mime = "image/" + ext
-      }
-    
-      if (ext == "html" || ext == "css"){
-        mime = "text/" + ext
-      }
-      if (ext == "js"){
-        mime = "application/javascript"
-      }
-    
-      //-- Peticion recibida
-      console.log("Peticion recibida!")
-      console.log("Recurso (URL): " + req.url)
-    
-      //-- Crear mensaje de respuesta o error
-    
-      console.log()
+    //-- Peticion recibida
+    console.log("Peticion recibida: " + q.pathname)
+  
+    //-- Crear mensaje de respuesta o error
+    console.log()
       fs.readFile("." + filename, (err, data) => {
     
         if (err) {
@@ -129,28 +132,28 @@ const server = http.createServer((req, res) => {
       })
     }
     
-    //-- Leer los parámetros recibidos en la peticion del buscador
+  //-- Leer los parámetros recibidos en la peticion del buscador
   } else {
 
-    const params = q.query
-    let parametro1 = params.param1.toLowerCase()
-  
-    console.log("Parametros: " + parametro1)
-  
-    let busqueda = ""
-  
-    if (params.param1.length > 2) {
-      for (var i = 0; i < productos.length; i++) {
-        if (productos[i].toLowerCase().indexOf(parametro1) != -1) {
-            busqueda += productos[i];
-        }
+  const params = q.query
+  let parametro1 = params.param1.toLowerCase()
+
+  console.log("Parametros: " + parametro1)
+
+  let busqueda = ""
+
+  if (params.param1.length > 1) {
+    for (var i = 0; i < productos.length; i++) {
+      if (productos[i].nombre.toLowerCase().indexOf(parametro1) != -1) {
+          busqueda += productos[i].nombre;
       }
     }
-    //-- El array de productos lo pasamos a una cadena de texto, en formato JSON
-    busqueda = JSON.stringify(busqueda)
-    res.setHeader('Content-Type', 'application/json')
-    res.write(busqueda)
-    return res.end()
+  }
+  //-- El array de productos lo pasamos a una cadena de texto, en formato JSON
+  busqueda = JSON.stringify(busqueda)
+  res.setHeader('Content-Type', 'application/json')
+  res.write(busqueda)
+  return res.end()
   }
 })
 

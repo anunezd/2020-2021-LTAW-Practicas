@@ -4,7 +4,7 @@ const ver = document.getElementById('ver')
 //-- Obtener el párrafo del DOM donde mostrar el resultado
 const resultado = document.getElementById('resultado');
 
-//-- Cuando el usuario escribe ver los productos (+ de 3 letras)
+//-- Cuando el usuario escribe ver los productos (2 letras min)
 ver.onkeyup = ()=>{
 
   //-- Crear objeto para hacer peticiones AJAX
@@ -19,13 +19,15 @@ ver.onkeyup = ()=>{
 
        //-- La respuesta es un objeto JSON
        let productos = JSON.parse(m.responseText)
+       console.log(productos);
 
        //-- Borrar el resultado anterior
        resultado.innerHTML = "";
 
        //-- Recorrer los productos del objeto JSON
        for (let i=0; i < productos.length; i++) {
-         resultado.innerHTML += productos[i].nombre;
+        //-- Añadir cada producto al párrafo de visualización 
+        resultado.innerHTML += productos[i];
        }
      }
    }
