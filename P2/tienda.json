@@ -1,0 +1,49 @@
+{
+    "productos": [  {
+                        "nombre": "DJI FPV",
+                        "precio": "1200€",
+                        "stock": "10"
+                    }, 
+                    {
+                        "nombre": "DJI Mavic Air 2",
+                        "precio": "900€",
+                        "stock": "10"
+                    }, 
+                    {
+                        "nombre": "DJI Mavic Mini 2",
+                        "precio": "500€",
+                        "stock": "10"
+                    },
+                    {
+                        "nombre": "FIMI X8 Mini",
+                        "precio": "380€",
+                        "stock": "10"
+                    }, 
+                    {
+                        "nombre": "FIMI X8 2020",
+                        "precio": "330€",
+                        "stock": "10"
+                    }
+                ],
+    "usuarios": [   {
+                        "nick": "anunezd",
+                        "pass": "0000",
+                        "real": "Alejandro Núñez",
+                        "email": "anunezd93@gmail.com"
+                    },  
+                    {
+                        "nick": "root",
+                        "pass": "1234",
+                        "real": "Root Toor",
+                        "email": "root@gmail.com"
+                    }
+                ],
+    "pedidos":  [
+                    {
+                        "usuario": "",
+                        "direccion": "",
+                        "tarjeta": "",
+                        "producto": ""
+                    }
+                ]
+}
