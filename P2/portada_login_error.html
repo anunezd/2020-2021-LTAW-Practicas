@@ -14,10 +14,6 @@
       <a  href= portada.html><img src="imagenes/logo_transparent.png" width="175" height="175"></a>
     </div>
 
-    <div class="carro">
-      <a href= "/carrito.html"><img src="imagenes/carrito.png" width="60" height="60"></a>
-    </div>
-
     <form id= "buscador" action="/search" method="post">
       <input id="ver" autocomplete=off placeholder="Encuentra tus drones" type=search name="busqueda" list="productos"/>
       <datalist id="productos">
@@ -34,21 +30,14 @@
             <input id="nick" type="nick"  name="id">
             <label id="lab_pass" for="password">Password</label>
             <input id="password" type="password"  name="pass">
-            <br><br>
             <center><input id="login_btn" type="submit" value="Login"></center>
-          </div>
-        </div>
-      </div>
-    </form>
-
-    <form id= "registrador">
-        <div class="container2">
-          <div class="right">
-            <div class="form">
+            <div style = "color:#FF0000">
               <h4> LOGIN ERROR</h4>
             </div>
           </div>
         </div>
+      </div>
+
     </form>
 
   </div>

@@ -169,8 +169,60 @@ const server = http.createServer((req, res) => {
           }
           return
           })
-        }  
+      }  
+    
+    } else if (q.pathname == "/carrito") {
 
+      req.on('data', chunk => {
+
+        // Recogemos los datos
+        data = chunk.toString()
+
+        name_producto = data.split("=")[0]
+
+        console.log("Producto añadido al carrito: " + name_producto)
+
+        // Vemos si esta registrado
+        if (cookie){
+          for (let valor in cookie.split("; ")) {
+            id = cookie.split("; ")[valor].split("=")[0]
+            pass = cookie.split("; ")[valor].split("=")[1]
+          }
+          // Añadimos el producto en el valor de la cookie
+          res.setHeader('Set-cookie', id + "=" + pass + "/" + name_producto)
+
+          req.on('end', ()=> {
+
+            fs.readFile("./portada_registrado.html", (err, data) => {
+
+              if (err) {
+                res.writeHead(404, {'Content-Type': 'text/html'})
+                return res.end("404 Not Found")
+              } else {
+                res.writeHead(200, {'Content-Type': 'text/html'})
+                res.write(data)
+                return res.end()
+              }
+            })
+          })
+        } else{
+          req.on('end', ()=> {
+
+            fs.readFile("./index_must_log.html", (err, data) => {
+
+              if (err) {
+                res.writeHead(404, {'Content-Type': 'text/html'})
+                return res.end("404 Not Found")
+              } else {
+                res.writeHead(200, {'Content-Type': 'text/html'})
+                res.write(data)
+                return res.end()
+              }
+            })
+          })
+        }
+        return
+        })
     // Para gestionar las peticiones  
     } else {  
 
