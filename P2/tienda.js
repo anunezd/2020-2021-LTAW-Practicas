@@ -8,6 +8,13 @@ console.log("Arrancando servidor...")
 //-- Leer fichero JSON con los productos
 const PRODUCTOS_JSON = fs.readFileSync('tienda.json');
 
+//-- Nombre del fichero JSON de salida
+const PRODUCTOS_JSON_OUT = "tienda_pedidos.json";
+
+//-- Obtener el array de la tienda
+let tienda = JSON.parse(PRODUCTOS_JSON);
+// console.log(productos)
+
 //-- Obtener el array de productos
 let productos = JSON.parse(PRODUCTOS_JSON).productos;
 // console.log(productos)
@@ -20,6 +27,9 @@ let usuarios = JSON.parse(PRODUCTOS_JSON).usuarios;
 usuarios.forEach((element, index)=>{
   console.log("Usuario: " + (index + 1) + ": " + element.nick + " || Nombre: " + element.real);
 });
+
+//-- Obtener el array de pedidios
+let pedidos = JSON.parse(PRODUCTOS_JSON).pedidos;
 
 //-- SERVIDOR: Bucle principal de atención a clientes
 const server = http.createServer((req, res) => {
@@ -121,20 +131,29 @@ const server = http.createServer((req, res) => {
           console.log("Nick: " + id)
           console.log("Password: " + pass)
 
+          usuarios.forEach((element, index)=>{
+            if (element.nick == id) {
+              if (element.pass == pass){
+                login = true;
+                console.log(login);
+                // Guardando cookie
+                {res.setHeader('Set-cookie', id + "=" + pass)}
+              }
+            }
+          });
+
+
           // Vemos si esta registrado
           if (cookie){
-            usuarios.forEach((element, index)=>{
-              if (element.nick == id) {
-                if (element.pass == pass){
-                  login = true;
-                  console.log(login);
-                }
+            for (let valor in cookie.split("; ")) {
+              console.log("Cookie: " + cookie.split("; ")[valor])
+              if (cookie.split("; ")[valor].split("=")[0] == id) {
               }
-            });
+            }
           }
 
-          // Guardando cookie
           if (!login) {
+          
             req.on('end', ()=> {
 
               fs.readFile("./portada_login_error.html", (err, data) => {
@@ -168,7 +187,7 @@ const server = http.createServer((req, res) => {
             })
           }
           return
-          })
+        })
       }  
     
     } else if (q.pathname == "/carrito") {
@@ -208,7 +227,7 @@ const server = http.createServer((req, res) => {
         } else{
           req.on('end', ()=> {
 
-            fs.readFile("./index_must_log.html", (err, data) => {
+            fs.readFile("./portada_login_error.html", (err, data) => {
 
               if (err) {
                 res.writeHead(404, {'Content-Type': 'text/html'})
@@ -222,7 +241,41 @@ const server = http.createServer((req, res) => {
           })
         }
         return
+      })
+    } else if (q.pathname == "/factura") {
+        req.on('data', chunk => {
+          // Recogemos los datos
+          data = chunk.toString()
+          let direccion = data.split("&")[0].split("=")[1]
+          let tarjeta = data.split("&")[1].split("=")[1]
+          console.log(id + "//" + name_producto + "//" + direccion + "//" + tarjeta);
+          //-- Recorrer el array de pedidos y añadir nueva información
+          pedidos.forEach((element, index)=>{
+            element.usuario = id;
+            element.direccion = direccion;
+            element.tarjeta = tarjeta;
+            element.producto = name_producto;
+          });
+          //-- Convertir la variable a cadena JSON
+          let myJSON = JSON.stringify(pedidos);
+          //-- Guardarla en el fichero destino
+          fs.writeFileSync(PRODUCTOS_JSON_OUT, myJSON);
         })
+        req.on('end', ()=> {
+
+          fs.readFile("./portada_registrado.html", (err, data) => {
+
+            if (err) {
+              res.writeHead(404, {'Content-Type': 'text/html'})
+              return res.end("404 Not Found")
+            } else {
+              res.writeHead(200, {'Content-Type': 'text/html'})
+              res.write(data)
+              return res.end()
+            }
+          })
+        })
+
     // Para gestionar las peticiones  
     } else {  
 
@@ -243,10 +296,9 @@ const server = http.createServer((req, res) => {
     }
     
     //-- Peticion recibida
-    console.log("Peticion recibida: " + q.pathname)
+    // console.log("Peticion recibida: " + q.pathname)
   
     //-- Crear mensaje de respuesta o error
-    console.log()
       fs.readFile("." + filename, (err, data) => {
     
         if (err) {

@@ -27,13 +27,13 @@
                 ],
     "usuarios": [   {
                         "nick": "anunezd",
-                        "pass": "0000",
+                        "pass": "1909",
                         "real": "Alejandro Núñez",
                         "email": "anunezd93@gmail.com"
                     },  
                     {
                         "nick": "root",
-                        "pass": "1234",
+                        "pass": "0000",
                         "real": "Root Toor",
                         "email": "root@gmail.com"
                     }

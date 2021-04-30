@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Πlota2</title>
+    <link rel="stylesheet" type="text/css" href="css/carrito.css">
+    <link rel="icon" href="imagenes/logo_transparent.png" type="image/x-icon">
+    <button onclick="myFunction()">Mostrar carrito</button>
+    <p id="demo"></p>
+    <script>
+      function myFunction() {
+        var x = document.cookie.split("/")[1];
+        x = x.replaceAll("+", " ");
+        document.getElementById("demo").innerHTML =  x;
+      }
+      function myFunction2() {
+      alert("PEDIDO REALIZADO CON EXITO");
+      }
+      </script>
+  </head>
+
+<body>
+  <h1>Rellena tus datos para finalizar la compra</h1>
+  <form id="form" class="topBefore" action="/factura" method="post">
+    <input id="direccion" name="direccion" type="text" placeholder="DIRECCION" required>
+    <input id="tarjeta" name="tarjeta" type="text" placeholder="TARJETA" required>
+    </br></br>
+    </br></br>
+    <button onclick="myFunction2()">Try it</button>
+  </form>
+</body>
+</html>
