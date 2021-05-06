@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>LAKERS-CHAT</title>
+    <link rel="stylesheet" type="text/css" href="chat.css">
+    <link rel="icon" href="lakers.png" type="image/x-icon">
+    <script src="jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js" defer></script>
+  </head>
+  <body onload="init()">
+    <div id="title">LAKERS-CHAT</div>
+    <div id="register-panel">
+      <input id="name" value="" placeholder="Nick" autocomplete="off"/>
+      <button type="button" id="register">ENTRAR</button>
+    </div>
+    <p id="line"></p>
+    <div class="container">
+      <div id="received">
+        <br>
+        <p id="display"></p>
+      </div>
+      <br>
+      <div id="send-mess">
+        <input id="msg" autocomplete="off"/>
+        <button type="button" id="send">ENVIAR</button>
+      </div>
+    </div>
+  </body>
+</html>

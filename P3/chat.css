@@ -1,0 +1,78 @@
+@font-face {
+  src: url("Cairo-Regular.ttf");
+  font-family: Cairo;
+}
+
+body {
+  text-align: center;
+  background-color: #F1C40F  ;
+}
+
+#title {
+  font-family: Cairo;
+  font-size: 500%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  height: 8%;
+}
+
+#line {
+  font-family: Cairo;
+  font-size: 150%;
+}
+
+#container {
+  width: 100%;
+  height: 90%;
+  padding: 0px;
+  float: left;
+}
+
+#received {
+  background-color: #7D3C98 ;
+  font-family: Cairo;
+  color: white;
+  margin-left: 12.5%;
+  font-size: 100%;
+  overflow-y: scroll;
+  width: 75%;
+  height: 50%;
+  text-align: left;
+  border: 3px solid black;
+  display: block;
+  position: absolute;
+}
+
+#send-mess {
+  margin-left: 12.5%;
+  padding-top: 400px;
+  width: 65%;
+  height: 50%;
+  display: block;
+  position: fixed;
+}
+
+#name, #register, #msg, #send {
+  font-family: Cairo;
+}
+
+#name, #register {
+  font-size: 150%;
+}
+
+#msg {
+  width: 94%;
+  height: 5%;
+  float: left;
+}
+
+#send {
+  width: 12%;
+  height: 3%;
+  position: fixed;
+  text-align: center;
+}
+
+#display {
+  margin-left: 5%;
+}
