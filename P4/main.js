@@ -8,55 +8,27 @@ const io = require('socket.io')(http);
 const colors = require('colors');
 const PUERTO = 8080;
 
+//-- Variable para acceder a la ventana principal
+//-- Se pone aquí para que sea global al módulo principal
+let win = null;
+
 //-- Crear las variables
 var users = 0;
 var names = {};
 var days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
 var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
               'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+var ip = require("ip");
 
 console.log("Arrancando electron...");
-
-//-- Variable para acceder a la ventana principal
-//-- Se pone aquí para que sea global al módulo principal
-let win = null;
 
 //-- Punto de entrada. En cuanto electron está listo,
 //-- ejecuta esta función
 electron.app.on('ready', () => {
 
-    //-- Crear la ventana principal de nuestra aplicación
-    win = new electron.BrowserWindow({
-        width: 600,   //-- Anchura 
-        height: 600,  //-- Altura
-
-        //-- Permitir que la ventana tenga ACCESO AL SISTEMA
-        webPreferences: {
-          nodeIntegration: true,
-          contextIsolation: false
-        }
-    });
-
-  //-- En la parte superior se nos ha creado el menu
-  //-- por defecto
-  //-- Si lo queremos quitar, hay que añadir esta línea
-  //win.setMenuBarVisibility(false)
-
-  //-- Cargar contenido web en la ventana
-  //-- La ventana es en realidad.... ¡un navegador!
-  //win.loadURL('https://www.urjc.es/etsit');
-
-  //-- Cargar interfaz gráfica en HTML
-  win.loadFile("index.html");
-
-});
-
-var ip = require("ip");
-console.log( ip.address() );
-
 //-- Imprimir por terminal              
 http.listen(PUERTO, () => {
-    console.log('Entra al chat en: http://localhost:' + PUERTO + '/')
+    console.log('Entra al chat en: '+ ip.address() + ':' + PUERTO + '/chat.html')
 });
 
 //-------- PUNTOS DE ENTRADA DE LA APLICACION WEB
@@ -79,6 +51,9 @@ io.on('connection', (socket) => {
         console.log(msg.red + ' se ha unido al chat'.green);
         io.emit('msg','<strong>server</strong>: ' + msg + ' se ha unido al chat');
         users += 1;
+        //-- Enviar un mensaje al proceso de renderizado para que lo saque
+        //-- por la interfaz gráfica
+        win.webContents.send('n_users', users);
         names[socket.id] = msg;
         socket.emit('welcome', '<strong>server</strong>: bienvenido, ' + msg);
       } else {
@@ -96,7 +71,7 @@ io.on('connection', (socket) => {
 
     // Eventos de la cmd
     socket.on('cmd', (msg) => {
-      console.log(names[socket.id].red + ': ' + msg.blue)
+      console.log(names[socket.id].red + ': ' + msg.yellow)
       let cmd = ''
       switch (msg) {
         case '/help':
@@ -148,3 +123,22 @@ function isAccepted(nick) {
   }
   return accepted;
 }
+
+    //-- Crear la ventana principal de nuestra aplicación
+    win = new electron.BrowserWindow({
+        width: 600,   //-- Anchura 
+        height: 600,  //-- Altura
+
+        //-- Permitir que la ventana tenga ACCESO AL SISTEMA
+        webPreferences: {
+          nodeIntegration: true,
+          contextIsolation: false
+        }
+    });
+
+  //-- Cargar interfaz gráfica en HTML
+  win.loadFile("index.html");
+
+
+
+});
