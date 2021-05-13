@@ -65,6 +65,7 @@ io.on('connection', (socket) => {
     //-- Evento de mensaje recibido: Reenviarlo a todos los clientes conectados
     socket.on('msg', (msg) => {
       console.log(names[socket.id].red + ": " + msg.blue);
+      win.webContents.send('msg', msg);
       //-- Reenviarlo a todos los clientes conectados
       io.emit('msg', '<strong>' + names[socket.id] + '</strong>: ' + msg);
     });
