@@ -109,6 +109,7 @@ io.on('connection', (socket) => {
     socket.on('disconnect', function(){
       console.log(names[socket.id].red + ' ha dejado el chat'.green);
       users -= 1;
+      win.webContents.send('n_users', users);
       io.emit('msg', '<strong>server</strong>: ' + names[socket.id] + ' ha dejado el chat');
       delete names[socket.id];
     });
@@ -127,8 +128,8 @@ function isAccepted(nick) {
 
     //-- Crear la ventana principal de nuestra aplicación
     win = new electron.BrowserWindow({
-        width: 600,   //-- Anchura 
-        height: 600,  //-- Altura
+        width: 800,   //-- Anchura 
+        height: 800,  //-- Altura
 
         //-- Permitir que la ventana tenga ACCESO AL SISTEMA
         webPreferences: {
@@ -140,6 +141,11 @@ function isAccepted(nick) {
   //-- Cargar interfaz gráfica en HTML
   win.loadFile("index.html");
 
-
+    //-- Esperar a recibir los mensajes de botón apretado (Test) del proceso de 
+    //-- renderizado. Al recibirlos se escribe una cadena en la consola
+    electron.ipcMain.handle('test', (event, msg) => {
+      console.log("-> Mensaje: " + msg);
+      io.emit("Test");
+    });
 
 });
