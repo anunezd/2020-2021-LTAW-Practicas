@@ -45,6 +45,11 @@ socket.on('msg', (msg) => {
     content = '# ' + msg + '<br>' + display.innerHTML;
     display.innerHTML = content;
 })
+
+socket.on('message', (msg) => {
+  content = msg + '<br>' + display.innerHTML;
+  display.innerHTML = content;
+})
   
 send.onclick = () => {
     if (msg.value){
